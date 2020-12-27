@@ -26,6 +26,15 @@ const typeDefs = gql`
         longitude: Float
     }
 
+    type Region {
+        id: ID!
+        name: String
+        fullName: String
+        country: String
+        latitude: Float
+        longitude: Float
+    }
+
     type Images {
         logo: String
         logo_small: String
@@ -35,6 +44,8 @@ const typeDefs = gql`
     type Query {
         vendors: [Vendor]
         vendor(id: ID!): Vendor
+        regions: [Region]
+        regionsByCountry(country: String): [Region]
     }
 `;
 

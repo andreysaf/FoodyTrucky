@@ -20,7 +20,6 @@ class VendorAPI extends RESTDataSource {
   }
 
   vendorReducer(vendor) {
-      console.log(vendor);
     return {
       id: vendor.identifier,
       name: vendor.name,

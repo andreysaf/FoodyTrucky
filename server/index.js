@@ -3,12 +3,14 @@ const typeDefs = require('./src/schema');
 const resolvers = require('./src/resolver');
 
 const VendorAPI = require('./src/datasources/vendor');
+const RegionAPI = require('./src/datasources/region');
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
     dataSources: () => ({
-        vendorAPI: new VendorAPI()
+        vendorAPI: new VendorAPI(),
+        regionAPI: new RegionAPI(),
     })
 });
 
