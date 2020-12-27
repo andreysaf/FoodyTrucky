@@ -1,24 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-  NormalizedCacheObject,
-} from '@apollo/client';
 import './index.css';
 import App from './App';
-
-const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
-  cache: new InMemoryCache(),
-});
+import { store } from './app/store';
+import { Provider } from 'react-redux';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
       <App />
-    </React.StrictMode>
-  </ApolloProvider>,
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
