@@ -6,8 +6,8 @@ class VendorAPI extends RESTDataSource {
     this.baseURL = 'http://data.streetfoodapp.com/1.1/';
   }
 
-  async getAllVendors() {
-    const res = await this.get('schedule/vancouver/');
+  async getAllVendors({ regionId }) {
+    const res = await this.get(`schedule/${regionId}/`);
     const result = JSON.parse(res);
     const vendors = result.vendors;
     return Object.values(vendors).map((vendor) => this.vendorReducer(vendor) );

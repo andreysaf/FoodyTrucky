@@ -42,7 +42,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        vendors: [Vendor]
+        vendors(regionId: String): [Vendor]
         vendor(id: ID!): Vendor
         regions: [Region]
         regionsByCountry(country: String): [Region]

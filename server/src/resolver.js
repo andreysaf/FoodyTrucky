@@ -1,7 +1,7 @@
 module.exports = {
     Query: {
-        vendors: async (_, __, { dataSources }) => 
-            dataSources.vendorAPI.getAllVendors(),
+        vendors: async (_, { regionId }, { dataSources }) => 
+            dataSources.vendorAPI.getAllVendors({ regionId }),
         vendor: async (_, { id }, { dataSources }) =>
             dataSources.vendorAPI.getVendor({vendorId : id}),
         regions: async (_, __, { dataSources }) => 

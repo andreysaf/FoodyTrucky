@@ -21,8 +21,6 @@ const REGIONS = gql`
     regions {
       id
       fullName
-      name
-      country
     }
   }
 `;
