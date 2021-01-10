@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+
+import VENDORS_BY_REGION from './VendorsQuery';
 
 import FoodTruck from '../../components/FoodTruck/FoodTruck';
 
@@ -7,23 +9,7 @@ interface FoodTrucksProps {
   region: string;
 }
 
-const VENDORS_BY_REGION = gql`
-  query GetVendorsByRegion($regionId: String, $pageSize: Int, $after: String) {
-    vendors(regionId: $regionId, pageSize: $pageSize, after: $after) {
-      vendors {
-        id
-        name
-        url
-        phone
-        email
-        description
-        rating
-      }
-      cursor
-      hasMore
-    }
-  }
-`;
+
 
 const FoodTrucks = (props: FoodTrucksProps) => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);

@@ -1,5 +1,7 @@
 import React, { useState, Fragment } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+
+import REGIONS from './RegionsQuery';
 
 import './Regions.css'
 
@@ -17,15 +19,7 @@ interface RegionProps {
   updateRegionId: (regionId: string) => void;
 }
 
-const REGIONS = gql`
-  query GetRegions {
-    regions {
-      id
-      name
-      fullName
-    }
-  }
-`;
+
 
 const Regions = (props: RegionProps) => {
   const [regionId, setRegionId] = useState<string>('');

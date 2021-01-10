@@ -24,7 +24,7 @@ const FoodTruck = (props: FoodTruckProps) => {
         {props.phone && <a href={`tel:${props.phone}`}>
           <i className="fas fa-phone"></i> {props.phone}
         </a>}
-        {props.url && <a href={`https://${props.url}`} target={'_blank'}>
+        {props.url && <a href={`https://${props.url}`} rel="noreferrer" target={'_blank'}>
         <i className="fas fa-link"></i> {props.url}
         </a>}
       </div>
