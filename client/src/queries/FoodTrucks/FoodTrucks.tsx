@@ -17,6 +17,7 @@ const VENDORS_BY_REGION = gql`
         phone
         email
         description
+        rating
       }
       cursor
       hasMore
