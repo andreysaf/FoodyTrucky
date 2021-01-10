@@ -1,11 +1,12 @@
 import React, { useState, Fragment } from 'react';
 import { useQuery, gql } from '@apollo/client';
 
+import './Regions.css'
+
 interface Region {
   id: string;
-  fullName: string;
   name: string;
-  country: string;
+  fullName: string;
 }
 
 interface RegionsResults {
@@ -20,6 +21,7 @@ const REGIONS = gql`
   query GetRegions {
     regions {
       id
+      name
       fullName
     }
   }
@@ -45,13 +47,12 @@ const Regions = (props: RegionProps) => {
             }}
           >
             <option hidden selected>
-              Select City
             </option>
             {data &&
               data.regions &&
               data.regions.map((region: Region) => (
                 <option value={region.id} key={region.id}>
-                  {region.fullName}
+                  {region.fullName ? region.fullName : region.name}
                 </option>
               ))}
           </select>

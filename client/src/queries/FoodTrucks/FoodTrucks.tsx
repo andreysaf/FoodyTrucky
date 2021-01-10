@@ -48,10 +48,7 @@ const FoodTrucks = (props: FoodTrucksProps) => {
               <p>There are no food trucks in this area.</p>
             ))}
           {data.vendors &&
-            data.vendors.hasMore &&
-            (isLoadingMore ? (
-              <p>Loading...</p>
-            ) : (
+            data.vendors.hasMore && (
               <button
                 onClick={async () => {
                   setIsLoadingMore(true);
@@ -65,9 +62,9 @@ const FoodTrucks = (props: FoodTrucksProps) => {
                   setIsLoadingMore(false);
                 }}
               >
-                More
+                {isLoadingMore ? 'Loading' : 'Still Hungry'}
               </button>
-            ))}
+            )}
         </Fragment>
       )}
     </Fragment>

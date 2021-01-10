@@ -1,4 +1,15 @@
 .card {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 20px;
+    background-color: #f2efe9;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 65px 0px rgb(15,18,8, 0.23);
+}
+
+p {
+    font-size: 20px;
 }
