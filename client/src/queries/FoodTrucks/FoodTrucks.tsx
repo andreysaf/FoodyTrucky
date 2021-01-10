@@ -23,11 +23,9 @@ const VENDORS_BY_REGION = gql`
 const FoodTrucks = (props: FoodTrucksProps) => {
   console.log(props.region);
 
-  const { loading, data, error } = useQuery(VENDORS_BY_REGION, {
+  const { loading, data } = useQuery(VENDORS_BY_REGION, {
     variables: { regionId: props.region },
   });
-
-  console.log(error);
 
   return (
     <Fragment>
@@ -37,7 +35,13 @@ const FoodTrucks = (props: FoodTrucksProps) => {
         <Fragment>
           {data &&
             data.vendors &&
-            data.vendors.map((vendor: any) => <FoodTruck {...vendor} />)}
+            (data.vendors.length > 0 ? (
+              data.vendors.map((vendor: any) => (
+                <FoodTruck key={vendor.id} {...vendor} />
+              ))
+            ) : (
+              <p>There are no food trucks in this area.</p>
+            ))}
         </Fragment>
       )}
     </Fragment>

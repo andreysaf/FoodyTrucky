@@ -13,7 +13,7 @@ interface RegionsResults {
 }
 
 interface RegionProps {
-    updateRegionId: (regionId: string) => void;
+  updateRegionId: (regionId: string) => void;
 }
 
 const REGIONS = gql`
@@ -44,6 +44,9 @@ const Regions = (props: RegionProps) => {
               props.updateRegionId(e.target.value);
             }}
           >
+            <option hidden selected>
+              Select City
+            </option>
             {data &&
               data.regions &&
               data.regions.map((region: Region) => (
