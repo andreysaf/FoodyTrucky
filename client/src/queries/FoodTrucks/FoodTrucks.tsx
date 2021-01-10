@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 import FoodTruck from '../../components/FoodTruck/FoodTruck';
@@ -8,24 +8,29 @@ interface FoodTrucksProps {
 }
 
 const VENDORS_BY_REGION = gql`
-  query GetVendorsByRegion($regionId: String) {
-    vendors(regionId: $regionId) {
-      id
-      name
-      url
-      phone
-      email
-      description
+  query GetVendorsByRegion($regionId: String, $pageSize: Int, $after: String) {
+    vendors(regionId: $regionId, pageSize: $pageSize, after: $after) {
+      vendors {
+        id
+        name
+        url
+        phone
+        email
+        description
+      }
+      cursor
+      hasMore
     }
   }
 `;
 
 const FoodTrucks = (props: FoodTrucksProps) => {
-  console.log(props.region);
-
-  const { loading, data } = useQuery(VENDORS_BY_REGION, {
-    variables: { regionId: props.region },
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const { loading, data, fetchMore } = useQuery(VENDORS_BY_REGION, {
+    variables: { regionId: props.region, pageSize: 10 },
   });
+
+  console.log(data);
 
   return (
     <Fragment>
@@ -33,14 +38,35 @@ const FoodTrucks = (props: FoodTrucksProps) => {
         <p>Loading...</p>
       ) : (
         <Fragment>
-          {data &&
-            data.vendors &&
-            (data.vendors.length > 0 ? (
-              data.vendors.map((vendor: any) => (
+          {data.vendors &&
+            data.vendors.vendors &&
+            (data.vendors.vendors.length > 0 ? (
+              data.vendors.vendors.map((vendor: any) => (
                 <FoodTruck key={vendor.id} {...vendor} />
               ))
             ) : (
               <p>There are no food trucks in this area.</p>
+            ))}
+          {data.vendors &&
+            data.vendors.hasMore &&
+            (isLoadingMore ? (
+              <p>Loading...</p>
+            ) : (
+              <button
+                onClick={async () => {
+                  setIsLoadingMore(true);
+                  await fetchMore({
+                    variables: {
+                      regionId: props.region,
+                      pageSize: 10,
+                      after: data.vendors.cursor,
+                    },
+                  });
+                  setIsLoadingMore(false);
+                }}
+              >
+                More
+              </button>
             ))}
         </Fragment>
       )}

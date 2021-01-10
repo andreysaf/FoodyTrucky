@@ -22,6 +22,7 @@ class VendorAPI extends RESTDataSource {
   vendorReducer(vendor) {
     return {
       id: vendor.identifier,
+      cursor: vendor.identifier,
       name: vendor.name,
       region: vendor.region,
       url: vendor.url,
