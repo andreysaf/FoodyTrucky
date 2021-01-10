@@ -5,7 +5,7 @@ export const cache: InMemoryCache = new InMemoryCache({
       Query: {
         fields: {
           vendors: {
-            keyArgs: false,
+            keyArgs: ["regionId"],
             merge(existing, incoming) {
               let vendors: Reference[] = [];
               if (existing && existing.vendors) {

@@ -30,7 +30,9 @@ const FoodTrucks = (props: FoodTrucksProps) => {
     variables: { regionId: props.region, pageSize: 10 },
   });
 
-  console.log(data);
+  if (!data) {
+    return <p>There are no food trucks in this area.</p>;
+  }
 
   return (
     <Fragment>
