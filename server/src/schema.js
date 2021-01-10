@@ -42,10 +42,20 @@ const typeDefs = gql`
     }
 
     type Query {
-        vendors(regionId: String): [Vendor]
+        vendors(
+            regionId: String
+            pageSize: Int
+            after: String
+        ): VendorConnection!
         vendor(id: ID!): Vendor
         regions: [Region]
         regionsByCountry(country: String): [Region]
+    }
+
+    type VendorConnection {
+        cursor: String!
+        hasMore: Boolean!
+        vendors: [Vendor]
     }
 `;
 
